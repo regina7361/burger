@@ -17,7 +17,7 @@ Delicious Burger is a restaurant app that lets users input the names of burgers 
     1. In terminal start the server - node server.js
     2. Navigate to the browser and enter the following URL - http://localhost:8097/
 
-    ![BurgerAppImage](https://github.com/regina7361/burger/blob/master/public/assets/img/appimage.png)
+![BurgerAppImage](https://github.com/regina7361/burger/blob/master/public/assets/img/appimage.png)
 
 ## Languages & tools
 
