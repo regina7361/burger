@@ -1,0 +1,130 @@
+<script src="https://code.jquery.com/jquery-git.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/burger_style.css">
+  
+<div class="burgerdiv">
+  <img class="burgerimg" src="https://s3.amazonaws.com/peoplepng/wp-content/uploads/2018/05/23153653/Burger-PNG-Free-Vector-1024x1024.png">
+</div>
+
+<div class="row">
+<div class="card" class="col-6" id="nonSelected">
+  <div class="card-header">
+    SELECT A BURGER
+  </div>
+  <div class="card-body">
+  {{#each burgers}}
+
+    <p>
+      {{this.id}}. {{this.burger_name}}
+
+      <button data-burgersid="{{this.id}}" class="delburgers" onclick="moveButton(this)">Devour!</button>
+    </p>
+  
+  {{/each}}
+</div>
+</div>
+
+<div class="card" class="col-6" id="selected">
+  <div class="card-header">
+    DEVOURED BURGERS
+  </div>
+  <div class="card-body">
+
+    <p>This is a placeholder for devoured burgers
+    </p>
+  
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="card" id="newcard" class="col-6">
+  <div class="card-header">
+Create Your Own Burger
+</div>
+<form id="createburgers" class="button-size">
+  <textarea type="text" name="burgers"></textarea>
+  <button type="submit" id="saveBurger">Save!</button>
+</form>
+</div>
+
+<div class="card" id="updateCard" class="col-6">
+  <div class="card-header">
+Update Your Burger
+</div>
+<form id="updateburgers" class="button-size">
+  <select name="id">
+		{{#each burgers}}
+			<option value="{{this.id}}">{{this.burger_name}}</option>
+		{{/each}}
+	</select>
+  <textarea type="text" name="burgers" placeholder="burgers"></textarea>
+  <button type="submit" id="updateBurger">Update!</button>
+</form>
+</div>
+</div>
+
+<script type="text/javascript">
+  $(".delburgers").on("click", function(event) {
+    // Get the ID from the button.
+    // This is shorthand for $(this).attr("data-burgerid")
+    var id = $(this).data("burgersid");
+
+    // Send the DELETE request.
+    $.ajax("/burgers/" + id, {
+      type: "DELETE"
+    }).then(
+      function() {
+        console.log("deleted id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+  $("#createburgers").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    // [name=burger] will find an element with a "name" attribute equal to the string "burger"
+    var newBurgers = {
+      burgers: $("#createburgers [name=burgers]").val().trim()
+    };
+
+    // Send the POST request.
+    $.ajax("/burgers", {
+      type: "POST",
+      data: newBurgers
+    }).then(
+      function() {
+        console.log("created new burgers");
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+  $("#updateburgers").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    // Get the ID by finding an element with a "name" attribute equal to the string "id"
+    var id = $("[name=id]").val().trim();
+
+    var updatedBurgers = {
+      burgers: $("#updateburgers [name=burgers]").val().trim()
+    };
+
+    // Send the PUT request.
+    $.ajax("/burgers/" + id, {
+      type: "PUT",
+      data: updatedBurgers
+    }).then(
+      function() {
+        console.log("updated id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+</script>

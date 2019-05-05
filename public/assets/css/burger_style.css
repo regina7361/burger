@@ -1,0 +1,67 @@
+body {
+    background-color: black;
+}
+
+h2 {
+    color: white;
+}
+
+.burgerdiv {
+    margin: 0;
+    width: 100%;
+    height: 20%;
+}
+
+.burgerimg {
+    width: 20%;
+    height: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card {
+    width: 40%;
+    height: 20rem;
+    margin: auto;
+}
+
+.card-header {
+    background-color: orange;
+    border: 1px solid black;
+}
+.row {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#newcard {
+    width: 40%;
+    height: 12rem;
+    margin: auto;
+}
+
+#updateCard {
+    width: 40%;
+    height: 12rem;
+    margin: auto;
+}
+
+textarea {
+    margin: 10px;
+    width: 18rem;
+}
+
+#saveBurger {
+    vertical-align: top;
+    margin: 10px;
+}
+
+#updateBurger {
+    vertical-align: top;
+    margin: 10px;
+}
+
+select {
+    margin: 10px;
+}
